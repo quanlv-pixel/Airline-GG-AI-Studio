@@ -1,0 +1,15 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write, get, list, create, update, delete: if true;
+    }
+  }
+  
+  // Explicitly target the app's database ID just in case
+  match /databases/ai-studio-jjairmanagementp-ead6c367-fae3-4a17-a7cb-6a90a768fe56/documents {
+    match /{document=**} {
+      allow read, write, get, list, create, update, delete: if true;
+    }
+  }
+}

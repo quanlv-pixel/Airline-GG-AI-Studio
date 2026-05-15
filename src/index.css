@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  
+  --color-brand-primary: #ed1c24;
+  --color-brand-secondary: #fbb03b;
+  --color-brand-dark: #1a1a1a;
+  --color-brand-muted: #f8f9fa;
+  --color-brand-accent: #fff5f5;
+  
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+}
+
+@layer base {
+  body {
+    @apply bg-brand-muted text-gray-900 font-sans antialiased;
+  }
+}
+
+.glass-card {
+  @apply bg-white border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300;
+}
+
+.jj-gradient {
+  background: linear-gradient(135deg, #ed1c24 0%, #ff4b5c 100%);
+}
+
+.jj-gradient-soft {
+  background: linear-gradient(135deg, #fff5f5 0%, #ffe8e8 100%);
+}
+
+@layer utilities {
+  @media print {
+    .print\:hidden {
+      display: none !important;
+    }
+    body {
+      background: white !important;
+    }
+    .glass-card {
+      box-shadow: none !important;
+      border: 1px solid #eee !important;
+    }
+    .shadow-2xl {
+      box-shadow: none !important;
+    }
+    .bg-brand-muted {
+      background: white !important;
+    }
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-200 rounded-full hover:bg-gray-300;
+}

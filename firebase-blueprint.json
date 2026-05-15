@@ -1,0 +1,73 @@
+{
+  "entities": {
+    "flight": {
+      "title": "Flight",
+      "description": "Represents a scheduled commercial flight.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Flight Number (e.g., JJ121)" },
+        "type": { "type": "string", "description": "Aircraft Type" },
+        "origin": { "type": "string", "description": "Departure Airport Code" },
+        "dest": { "type": "string", "description": "Arrival Airport Code" },
+        "departure": { "type": "string", "description": "Departure time ISO string" },
+        "arrival": { "type": "string", "description": "Arrival time string" },
+        "status": { 
+          "type": "string", 
+          "enum": ["On Time", "Delayed", "Boarding", "Scheduled", "Cancelled"] 
+        },
+        "price": { "type": "string", "description": "Fare price" },
+        "cabin": { "type": "string", "description": "Cabin occupancy percentage" },
+        "seats": { "type": "number", "description": "Total seat capacity" }
+      },
+      "required": ["id", "type", "origin", "dest", "departure", "status"]
+    },
+    "passenger": {
+      "title": "Passenger",
+      "description": "Represents a passenger in the CRM/Loyalty program.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Internal Passenger ID" },
+        "name": { "type": "string", "description": "Full name" },
+        "nationality": { "type": "string", "description": "Nationality" },
+        "passport": { "type": "string", "description": "Passport Number" },
+        "email": { "type": "string", "format": "email" },
+        "status": { 
+          "type": "string", 
+          "enum": ["Member", "Silver", "Gold", "Platinum"] 
+        },
+        "spend": { "type": "string", "description": "Total spend amount" }
+      },
+      "required": ["id", "name", "email", "status"]
+    },
+    "booking": {
+      "title": "Booking",
+      "description": "Represents a flight reservation.",
+      "type": "object",
+      "properties": {
+        "pnr": { "type": "string", "description": "Passenger Name Record (6-char ID)" },
+        "passenger": { "type": "string", "description": "Passenger Name" },
+        "flight": { "type": "string", "description": "Flight Number" },
+        "route": { "type": "string", "description": "Flight Route (e.g., SGN-HAN)" },
+        "date": { "type": "string", "description": "Flight Date" },
+        "seat": { "type": "string", "description": "Assigned Seat" },
+        "status": { "type": "string", "enum": ["Confirmed", "Pending", "Cancelled"] },
+        "paid": { "type": "boolean" }
+      },
+      "required": ["pnr", "passenger", "flight", "seat", "status", "paid"]
+    }
+  },
+  "firestore": {
+    "/flights/{flightId}": {
+      "schema": "flight",
+      "description": "Collection of commercial flights."
+    },
+    "/passengers/{passengerId}": {
+      "schema": "passenger",
+      "description": "Collection of registered passengers."
+    },
+    "/bookings/{pnr}": {
+      "schema": "booking",
+      "description": "Collection of passenger bookings."
+    }
+  }
+}
